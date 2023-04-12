@@ -1,6 +1,8 @@
 import streamlit as st
 import pickle
 import pandas as pd
+import warnings
+warnings.filterwarnings("ignore")
 
 teams = ['Sunrisers Hyderabad',
  'Mumbai Indians',
@@ -21,7 +23,32 @@ cities = ['Hyderabad', 'Bangalore', 'Mumbai', 'Indore', 'Kolkata', 'Delhi',
 pipe = pickle.load(open('pipetest.pkl','rb'))
 st.title('IPL Win Predictor')
 
-col1, col2 = st.beta_columns(2)
+#Background Image
+page_bg_img = '''
+<style>
+[data-testid="stAppViewContainer"] {
+background-image: url("https://www.91-cdn.com/hub/wp-content/uploads/2023/03/How-to-watch-TATA-IPL-2023-live-streaming-online-free-on-phone-and-laptop.png");
+background-size: cover;}
+
+[data-testid="stSidebar"] > div:first-child {{
+background-image: url("https://www.icccricketschedule.com/wp-content/uploads/2021/12/IPL-2022-Teams-1.jpg");
+background-position: center; 
+background-repeat: no-repeat;
+background-attachment: fixed;
+}}
+
+[data-testid="stHeader"] {{
+background: rgba(0,0,0,0);
+}}
+
+[data-testid="stToolbar"] {{
+right: 2rem;
+</style>
+'''
+
+st.markdown(page_bg_img, unsafe_allow_html=True)
+
+col1, col2 = st.columns(2)
 
 with col1:
     batting_team = st.selectbox('Select the batting team',sorted(teams))
@@ -32,7 +59,7 @@ selected_city = st.selectbox('Select host city',sorted(cities))
 
 target = st.number_input('Target')
 
-col3,col4,col5 = st.beta_columns(3)
+col3,col4,col5 = st.columns(3)
 
 with col3:
     score = st.number_input('Score')
